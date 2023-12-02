@@ -35,6 +35,7 @@ Route::prefix('Blog')->group(function () {
     });
     Route::get('Medical', function () {
         return view('medical');
+        
     });
 });
 Route::get('control', [ExampleController::class, 'show']);
