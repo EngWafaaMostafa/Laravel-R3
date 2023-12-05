@@ -16,7 +16,7 @@
         <h2>Form</h2>
         <form action="{{route('logged')}}" method="post">
             <!-- hidden input token without it laravel cant take any information from user-->
-            @csrf
+            @csrf   
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">

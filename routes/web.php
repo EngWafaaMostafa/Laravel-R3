@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('login', [ExampleController::class, 'login']);
-Route::post('logged', [ExampleController::class, 'logged'])->name('logged');
+Route::get('login', [loginController::class, 'create']);
+Route::post('logged', [loginController::class, 'store'])->name('logged');
 // Route::get('login', function () {
-//     return view('login');
+//     return view('login');  
 // });
 // Route::post('logged', function () {
 //     // return 'you are logged in';
@@ -58,5 +58,5 @@ Route::post('logged', [ExampleController::class, 'logged'])->name('logged');
 
 //     });
 // });
-Route::get('control', [ExampleController::class, 'show']);
-//Route::get('control', [ExampleController::class, 'store']);
+//Route::get('control1', [ExampleController::class, 'show']);
+Route::get('control', [loginController::class, 'create']);

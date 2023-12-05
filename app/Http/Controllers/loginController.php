@@ -19,8 +19,10 @@ class loginController extends Controller
      */
     public function create()
     {
-       // return view('login.create');
+        return view('login');
     }
+
+
 
     /**
      * Store a newly created resource in storage.
