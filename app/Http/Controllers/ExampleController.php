@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 class ExampleController extends Controller
 {
-    public function show()
+    public function logged(Request $request)
     {
-        return 'welcome';
+        return $request->all();
+    }
+    public function login(Request $request)
+    {
+        return view('login');
     }
 }
