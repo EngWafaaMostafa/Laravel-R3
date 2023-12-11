@@ -3,6 +3,8 @@
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\carController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('login', [loginController::class, 'create']);
-Route::post('logged', [loginController::class, 'store'])->name('logged');
+Route::post('storeCar', [carController::class, 'store'])->name('storeCar');
+Route::get('createCar', [carController::class, 'create']);
+//Route::get('createCar', [carController::class, 'create']);
+Route::get('AddPost', [PostController::class, 'create']);
+Route::post('AddPost', [PostController::class, 'store'])->name('AddPost');
+// Route::get('login', [loginController::class, 'create']);
+// Route::post('logged', [loginController::class, 'store'])->name('logged');
 // Route::get('login', function () {
 //     return view('login');  
 // });
@@ -59,4 +66,4 @@ Route::post('logged', [loginController::class, 'store'])->name('logged');
 //     });
 // });
 //Route::get('control1', [ExampleController::class, 'show']);
-Route::get('control', [loginController::class, 'create']);
+//Route::get('control', [loginController::class, 'create']);
