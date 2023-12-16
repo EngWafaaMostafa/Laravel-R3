@@ -5,6 +5,7 @@ use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\carController;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,28 @@ use App\Http\Controllers\PostController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('storeCar', [carController::class, 'store'])->name('storeCar');
+//day 4
+Route::get('Cars', [carController::class, 'index']); //it must done before show data
 Route::get('createCar', [carController::class, 'create']);
-//Route::get('createCar', [carController::class, 'create']);
+//end of day 4 
+Route::get('UpdateCar/{id}', [carController::class, 'edit']);
+Route::put('Update/{id}', [carController::class, 'update'])->name('update');
+Route::get('showCar/{id}', [carController::class, 'show'])->name('show');
+Route::post('storeCar', [carController::class, 'store'])->name('storeCar'); //another way to insert using model
+
+Route::get('Posts', [postController::class, 'index']);
 Route::get('AddPost', [PostController::class, 'create']);
 Route::post('AddPost', [PostController::class, 'store'])->name('AddPost');
+Route::get('Posts/{id}', [postController::class, 'show'])->name('show');
+//task day 5
+Route::get('updatePosts/{id}', [PostController::class, 'edit']);
+Route::put('update/{id}', [PostController::class, 'update'])->name('update');
+Route::get('showPost/{id}', [PostController::class, 'show'])->name('show');
+//Route::post('storeCar', [carController::class, 'store'])->name('storeCar');
+//end of task 5
+
+
+
 // Route::get('login', [loginController::class, 'create']);
 // Route::post('logged', [loginController::class, 'store'])->name('logged');
 // Route::get('login', function () {

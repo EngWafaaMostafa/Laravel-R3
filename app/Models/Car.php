@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description', 'published']; //another way to insert
 }
