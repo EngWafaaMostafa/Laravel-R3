@@ -29,6 +29,11 @@ Route::get('UpdateCar/{id}', [carController::class, 'edit']);
 Route::put('Update/{id}', [carController::class, 'update'])->name('update');
 Route::get('showCar/{id}', [carController::class, 'show'])->name('show');
 Route::post('storeCar', [carController::class, 'store'])->name('storeCar'); //another way to insert using model
+Route::get('deleteCar/{id}', [carController::class, 'destroy']);
+Route::get('forceDeleteCar/{id}', [carController::class, 'forceDelete'])->name('forceDelete');
+Route::get('trashedCar', [carController::class, 'trashed'])->name('trashedCar');
+Route::get('restoreCar/{id}', [carController::class, 'restore'])->name('restoreCar');
+
 
 Route::get('Posts', [postController::class, 'index']);
 Route::get('AddPost', [PostController::class, 'create']);
@@ -38,11 +43,14 @@ Route::get('Posts/{id}', [postController::class, 'show'])->name('show');
 Route::get('updatePosts/{id}', [PostController::class, 'edit']);
 Route::put('update/{id}', [PostController::class, 'update'])->name('update');
 Route::get('showPost/{id}', [PostController::class, 'show'])->name('show');
+
 //Route::post('storeCar', [carController::class, 'store'])->name('storeCar');
 //end of task 5
-
-
-
+//task day 6
+Route::get('deletePost/{id}', [PostController::class, 'destroy']);
+Route::get('trashedPost', [PostController::class, 'trashed'])->name('trashedPost');
+Route::get('forceDelete/{id}', [PostController::class, 'forceDelete'])->name('forceDelete');
+Route::get('restorePost/{id}', [PostController::class, 'restore'])->name('restorePost');
 // Route::get('login', [loginController::class, 'create']);
 // Route::post('logged', [loginController::class, 'store'])->name('logged');
 // Route::get('login', function () {

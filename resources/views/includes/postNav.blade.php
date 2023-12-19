@@ -6,7 +6,7 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="/laravel-R3/public/Posts">Home</a></li>
             <li><a href="/laravel-R3/public/AddPost">add Post</a></li>
-            <!-- <li><a href="UpdateCar">Update Car</a></li> -->
+            <li><a href="{{ route('trashedPost') }}">Trashed Posts</a></li>
             <!-- <li><a href="#">Page 3</a></li> -->
         </ul>
     </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Posts</title>
+    <title>Trashed Cars List</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,32 +11,32 @@
 </head>
 
 <body>
-    @include('includes.postNav')
+    @include('includes.nav')
     <div class="container">
-        <h2>Posts List</h2>
+        <h2>Trashed Cars List</h2>
 
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Post Title</th>
-                    <th>Auther</th>
-                    <th>Content</th>
+                    <th>Title</th>
+                    <th>Description</th>
                     <th>Published</th>
-                    <th>Edit Post</th>
-                    <th>Show Post</th>
-                    <th>Delete Post</th>
+
+                    <th>Delete Car</th>
+                    <th>Restore Car</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($post as $post)
+                @foreach($car as $car)
                 <tr>
-                    <td>{{$post->Title}}</td>
-                    <td>{{$post->Auther}}</td>
-                    <td>{{$post->Content}}</td>
-                    <td>{{$post->Published ?'Yes':'No'}}</td>
-                    <td><a href="updatePosts/{{$post->id}}">Update</a></td>
-                    <td><a href="showPost/{{$post->id}}">Show</a></td>
-                    <td><a href="deletePost/{{$post->id}}">Delete</a></td>
+                    <td>{{$car->title}}</td>
+                    <td>{{$car->description}}</td>
+                    <td>{{$car->published ?'Yes':'No'}}</td>
+
+
+                    <td><a href="forceDeleteCar/{{$car->id}}" onclick="return confirm('Are you sure you want to permanently delete this record ?')">Force Delete</a></td>
+                    <td><a href="restoreCar/{{$car->id}}">Restore</a></td>
+
                 </tr>
                 @endforeach
             </tbody>

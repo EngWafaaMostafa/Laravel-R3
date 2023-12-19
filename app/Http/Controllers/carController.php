@@ -7,7 +7,7 @@ use App\Models\Car;
 
 class carController extends Controller
 {
-    private $columns = ['title', 'description', 'published'];
+    //private $columns = ['title', 'description', 'published'];
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +30,11 @@ class carController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only($this->columns);
+        //$data = $request->only($this->columns);
+        $data = $request->validate([
+            'title' => 'required|string|max:50',
+            'description' => 'required|string|max:50'
+        ]);
         $data['published'] = isset($request->published);
         Car::create($data);
         return redirect('Cars');
@@ -76,7 +80,11 @@ class carController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->only($this->columns);
+        $data = $request->validate([
+            'title' => 'required|string|max:50',
+            'description' => 'required|string|max:50'
+        ]);
+        //$data = $request->only($this->columns);
         $data['published'] = isset($request->published);
         Car::where('id', $id)->update($data);
         return redirect('Cars');
@@ -87,6 +95,25 @@ class carController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Car::where('id', $id)->delete();
+        return redirect('Cars');
+    }
+    /**
+     * trashed list
+     */
+    public function trashed()
+    {
+        $car = Car::onlyTrashed()->get();
+        return view('trashedCar', compact('car'));
+    }
+    public function forceDelete(string $id)
+    {
+        Car::where('id', $id)->forceDelete();
+        return redirect('Cars');
+    }
+    public function restore(string $id)
+    {
+        Car::where('id', $id)->restore();
+        return redirect('Cars');
     }
 }

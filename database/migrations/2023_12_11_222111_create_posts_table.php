@@ -20,6 +20,7 @@ return new class extends Migration
             //$table->longText('About');
             //$table->longText('Comments');
             $table->boolean('Published');
+            $table->softDeletes();
         });
     }
 

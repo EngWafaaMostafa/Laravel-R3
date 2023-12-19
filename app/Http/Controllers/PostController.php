@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    private $columns = ['Title', 'Content', 'Auther', 'Published'];
+    //private $columns = ['Title', 'Content', 'Auther', 'Published'];
     /**
      * Display a listing of the resource.
      */
@@ -30,8 +30,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only($this->columns);
-        $data['published'] = isset($request->published);
+        $data = $request->validate([
+            'Title' => 'required|string|max:50',
+            'Description' => 'required|string|max:50',
+            'Auther' => 'required|string|max:50'
+        ]);
+        //$data = $request->only($this->columns);
+        $data['Published'] = isset($request->Published);
         Post::create($data);
         return redirect('Posts');
         //     $post = new Post();
@@ -76,7 +81,12 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->only($this->columns);
+        $data = $request->validate([
+            'Title' => 'required|string|max:50',
+            'Description' => 'required|string|max:50',
+            'Auther' => 'required|string|max:50'
+        ]);
+        //$data = $request->only($this->columns);
         $data['Published'] = isset($request->Published);
         Post::where('id', $id)->update($data);
         return redirect('Posts');
@@ -87,6 +97,25 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Post::where('id', $id)->delete();
+        return redirect('Posts');
+    }
+    /**
+     *trashed list
+     */
+    public function trashed()
+    {
+        $post = Post::onlyTrashed()->get();
+        return view('trashedPost', compact('post'));
+    }
+    public function forceDelete(string $id)
+    {
+        Post::where('id', $id)->forceDelete();
+        return redirect('Posts');
+    }
+    public function restore(string $id)
+    {
+        Post::where('id', $id)->restore();
+        return redirect('Posts');
     }
 }

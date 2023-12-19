@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Posts</title>
+    <title>Trashed Posts List</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,7 +13,7 @@
 <body>
     @include('includes.postNav')
     <div class="container">
-        <h2>Posts List</h2>
+        <h2>Trashed Posts List</h2>
 
         <table class="table table-hover">
             <thead>
@@ -22,9 +22,9 @@
                     <th>Auther</th>
                     <th>Content</th>
                     <th>Published</th>
-                    <th>Edit Post</th>
-                    <th>Show Post</th>
+
                     <th>Delete Post</th>
+                    <th>Restore Post</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,9 +34,10 @@
                     <td>{{$post->Auther}}</td>
                     <td>{{$post->Content}}</td>
                     <td>{{$post->Published ?'Yes':'No'}}</td>
-                    <td><a href="updatePosts/{{$post->id}}">Update</a></td>
-                    <td><a href="showPost/{{$post->id}}">Show</a></td>
-                    <td><a href="deletePost/{{$post->id}}">Delete</a></td>
+
+                    <td><a href="forceDelete/{{$post->id}}" onclick="return confirm('Are you sure you want to permanently delete this record ?')">Force Delete</a></td>
+                    <td><a href="restorePost/{{$post->id}}">Restore</a></td>
+
                 </tr>
                 @endforeach
             </tbody>

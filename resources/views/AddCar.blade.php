@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Add Car</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,11 +19,17 @@
             @csrf
             <div class="form-group">
                 <label for="email">Title</label>
-                <input type="text" class="form-control" id="email" placeholder="Enter email" name="title">
+                <input type="text" class="form-control" id="email" placeholder="Enter email" name="title" value="{{old('title')}}">
+                @error('title')
+                {{$message}}
+                @enderror
             </div>
             <div class="form-group">
                 <label for="pwd">Description</label>
-                <textarea class="form-control" name="description" id="" cols="60" rows="3"></textarea>
+                <textarea class="form-control" name="description" id="" cols="60" rows="3">{{old('description')}}</textarea>
+                @error('description')
+                {{$message}}
+                @enderror
             </div>
             <div class="checkbox">
                 <label><input type="checkbox" name="published"> Published me</label>

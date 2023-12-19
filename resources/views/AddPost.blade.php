@@ -27,17 +27,28 @@
 
             <hr class="my-4" />
             <div class="form-group mb-3 row"><label for="title2" class="col-md-5 col-form-label">Post Title</label>
-                <div class="col-md-7"><input type="text" class="form-control form-control-lg" id="title2" name="Title" placeholder="Enter Post Title"></div>
+                <div class="col-md-7"><input type="text" class="form-control form-control-lg" id="title2" name="Title" placeholder="Enter Post Title" value="{{old('Title')}}"></div>
+                @error('Title')
+                {{$message}}
+                @enderror
             </div>
 
             <hr class="my-4" />
             <div class="form-group mb-3 row"><label for="title2" class="col-md-5 col-form-label">Auther</label>
-                <div class="col-md-7"><input type="text" class="form-control form-control-lg" id="Auther" name="Auther" placeholder="Enter Auther"></div>
+                <div class="col-md-7"><input type="text" class="form-control form-control-lg" id="Auther" name="Auther" placeholder="Enter Auther" value="{{old('Auther')}}"></div>
+                @error('Auther')
+                {{$message}}
+                @enderror
             </div>
 
             <hr class="bg-transparent border-0 py-1" />
             <div class="form-group mb-3 row"><label for="content4" class="col-md-5 col-form-label">Post Content</label>
-                <div class="col-md-7"><textarea class="form-control form-control-lg" id="content4" name="Content" placeholder="Enter Content"></textarea></div>
+                <div class="col-md-7"><textarea class="form-control form-control-lg" id="content4" name="Content" placeholder="Enter Content">{{old('Content')}}</textarea>
+                 @error('Content')
+                    {{$message}}
+                    @enderror
+                </div>
+
             </div>
 
 

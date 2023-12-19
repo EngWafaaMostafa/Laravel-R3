@@ -6,7 +6,7 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="/laravel-R3/public/Cars">Home</a></li>
             <li><a href="/laravel-R3/public/createCar">add Car</a></li>
-            <!-- <li><a href="UpdateCar">Update Car</a></li> -->
+            <li><a href="{{ route('trashedCar') }}">Trashed Cars</a></li>
             <!-- <li><a href="#">Page 3</a></li> -->
         </ul>
     </div>

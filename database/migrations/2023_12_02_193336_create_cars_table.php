@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('description');
             $table->boolean('published');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
