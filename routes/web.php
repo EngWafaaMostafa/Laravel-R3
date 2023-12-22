@@ -51,6 +51,17 @@ Route::get('deletePost/{id}', [PostController::class, 'destroy']);
 Route::get('trashedPost', [PostController::class, 'trashed'])->name('trashedPost');
 Route::get('forceDelete/{id}', [PostController::class, 'forceDelete'])->name('forceDelete');
 Route::get('restorePost/{id}', [PostController::class, 'restore'])->name('restorePost');
+//day 7
+Route::get('test', function () {
+    return view('test');
+});
+Route::get('image', function () {
+    return view('image');
+});
+//Route::post('imageUploaded', [ExampleController::class, 'upload'])->name('imageUploaded');
+
+Route::put('upload', [carController::class, 'upload'])->name('update');
+//end of day7
 // Route::get('login', [loginController::class, 'create']);
 // Route::post('logged', [loginController::class, 'store'])->name('logged');
 // Route::get('login', function () {

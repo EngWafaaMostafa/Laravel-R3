@@ -7,8 +7,12 @@
     <title>Document</title>
 </head>
 
+
 <body>
-    <img src="{{asset('assets/images/DSC08166.JPG')}}" alt="">
+    <form action="{{route('imageUploaded')}}" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="image">
+        <input type="submit" value="Upload">
 </body>
 
 </html>

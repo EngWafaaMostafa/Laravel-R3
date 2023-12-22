@@ -14,12 +14,12 @@
     @include('includes.nav')
     <div class="container">
         <h2>Add Car</h2>
-        <form action="{{route('storeCar')}}" method="post">
+        <form action="{{route('storeCar')}}" method="post" enctype="multipart/form-data">
             <!-- hidden input token without it laravel cant take any information from user-->
             @csrf
             <div class="form-group">
-                <label for="email">Title</label>
-                <input type="text" class="form-control" id="email" placeholder="Enter email" name="title" value="{{old('title')}}">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" value="{{old('title')}}">
                 @error('title')
                 {{$message}}
                 @enderror
@@ -31,8 +31,15 @@
                 {{$message}}
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="image">image</label>
+                <input type="file" class="form-control" id="image" placeholder="Enter image" name="image">
+                @error('image')
+                {{$message}}
+                @enderror
+            </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="published"> Published me</label>
+                <label><input type="checkbox" name="published" @checked(old('published'))> Published me</label>
             </div>
             <button type="submit" class="btn btn-default">Insert</button>
         </form>

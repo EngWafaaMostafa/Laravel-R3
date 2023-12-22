@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Traits\Common;
 
 class carController extends Controller
 {
+    use Common;
     //private $columns = ['title', 'description', 'published'];
     /**
      * Display a listing of the resource.
@@ -30,11 +32,23 @@ class carController extends Controller
      */
     public function store(Request $request)
     {
+        $message = $this->messages();
+        // $message = [
+        //     'title.required' => 'Title is required العنوان مطلوب ',
+        //     'title.string' => 'should be string',
+        //     'description.required' => 'should be text'
+        // ];
         //$data = $request->only($this->columns);
         $data = $request->validate([
             'title' => 'required|string|max:50',
-            'description' => 'required|string|max:50'
-        ]);
+            'description' => 'required|string|max:50',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ], $message);
+
+
+        $fileName = $this->uploadFile($request->image, 'assets/images');
+        $data['image'] = $fileName;
+
         $data['published'] = isset($request->published);
         Car::create($data);
         return redirect('Cars');
@@ -80,12 +94,29 @@ class carController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $message = $this->messages();
         $data = $request->validate([
             'title' => 'required|string|max:50',
-            'description' => 'required|string|max:50'
-        ]);
-        //$data = $request->only($this->columns);
+            'description' => 'required|string|max:50',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        ], $message);
         $data['published'] = isset($request->published);
+        //$image = $request->file('image');
+        if ($request->hasFile('image')) {
+            $fileName = $this->uploadFile($request->image, 'assets/images');
+            $data['image'] = $fileName;
+        }
+        // if ($image) {
+        //     $fileName = $this->uploadFile($image, 'assets/images');
+        //     $data['image'] = $fileName;
+        // } else {
+        //     $car = Car::findOrFail($id);
+        //     $data['image'] = $car->image;
+        // }
+        //$fileName = $this->uploadFile($request->image, 'assets/images');
+        //$data['image'] = $fileName;
+        //$data = $request->only($this->columns);
+
         Car::where('id', $id)->update($data);
         return redirect('Cars');
     }
@@ -115,5 +146,27 @@ class carController extends Controller
     {
         Car::where('id', $id)->restore();
         return redirect('Cars');
+    }
+    public function messages()
+
+    {
+
+
+        return [
+            'title.required' => 'عنوان السياره مطلوب',
+            'title.string' => 'Should be string',
+            'description.required' => 'should be text',
+            'image.required' => 'Please be sure to select an image',
+            'image.mimes' => 'Incorrect image type',
+            'image.max' => 'Max file size exceeded',
+        ];
+    }
+    public function upload(Request $request)
+    {
+        $file_extension = $request->image->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $path = 'assets/images';
+        $request->image->move($path, $file_name);
+        return 'Upload';
     }
 }
