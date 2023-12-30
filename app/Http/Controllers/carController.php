@@ -94,18 +94,40 @@ class carController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $message = $this->messages();
+        $messages = $this->messages();
         $data = $request->validate([
             'title' => 'required|string|max:50',
-            'description' => 'required|string|max:50',
+            'description' => 'required|string',
             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
-        ], $message);
-        $data['published'] = isset($request->published);
-        //$image = $request->file('image');
+        ], $messages);
+
         if ($request->hasFile('image')) {
             $fileName = $this->uploadFile($request->image, 'assets/images');
             $data['image'] = $fileName;
+            // unlink("assets/images/" . $request->oldImage);
         }
+
+        $data['published'] = isset($request->published);
+        Car::where('id', $id)->update($data);
+        return redirect('Cars');
+        // $message = $this->messages();
+        // $data = $request->validate([
+        //     'title' => 'required|string|max:50',
+        //     'description' => 'required|string|max:50',
+        //     'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        // ], $message);
+        // return dd($data);
+        // //$image = $request->file('image');
+        // if ($request->hasFile('image')) {
+        //     $fileName = $this->uploadFile($request->image, 'assets/images');
+        //     $data['image'] = $fileName;
+        // } else {
+        //     // $car = Car::findOrFail($id);
+        //     $data['image'] = $request->oldImage;
+        // }
+        // $data['published'] = isset($request->published);
+        // Car::where('id', $id)->update($data);
+        // return redirect('Cars');
         // if ($image) {
         //     $fileName = $this->uploadFile($image, 'assets/images');
         //     $data['image'] = $fileName;
@@ -117,8 +139,6 @@ class carController extends Controller
         //$data['image'] = $fileName;
         //$data = $request->only($this->columns);
 
-        Car::where('id', $id)->update($data);
-        return redirect('Cars');
     }
 
     /**

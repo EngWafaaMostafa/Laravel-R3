@@ -26,7 +26,7 @@ Route::get('Cars', [carController::class, 'index']); //it must done before show 
 Route::get('createCar', [carController::class, 'create']);
 //end of day 4 
 Route::get('UpdateCar/{id}', [carController::class, 'edit']);
-Route::put('Update/{id}', [carController::class, 'update'])->name('update');
+Route::put('UpdateCar/{id}', [carController::class, 'update'])->name('updateCar');
 Route::get('showCar/{id}', [carController::class, 'show'])->name('show');
 Route::post('storeCar', [carController::class, 'store'])->name('storeCar'); //another way to insert using model
 Route::get('deleteCar/{id}', [carController::class, 'destroy']);
@@ -41,7 +41,7 @@ Route::post('AddPost', [PostController::class, 'store'])->name('AddPost');
 Route::get('Posts/{id}', [postController::class, 'show'])->name('show');
 //task day 5
 Route::get('updatePosts/{id}', [PostController::class, 'edit']);
-Route::put('update/{id}', [PostController::class, 'update'])->name('update');
+Route::put('updatePost/{id}', [PostController::class, 'update'])->name('updatePost');
 Route::get('showPost/{id}', [PostController::class, 'show'])->name('show');
 
 //Route::post('storeCar', [carController::class, 'store'])->name('storeCar');
@@ -58,9 +58,23 @@ Route::get('test', function () {
 Route::get('image', function () {
     return view('image');
 });
+//day 8
+Route::get('testHome', function () {
+    return view('testHome');
+});
+Route::get('404', function () {
+    return view('404');
+})->name('404');
+
+Route::get('contact', function () {
+    return view('contact');
+})->name('contact');
+
+//end of day8
+
 //Route::post('imageUploaded', [ExampleController::class, 'upload'])->name('imageUploaded');
 
-Route::put('upload', [carController::class, 'upload'])->name('update');
+//Route::put('upload', [carController::class, 'upload'])->name('update');
 //end of day7
 // Route::get('login', [loginController::class, 'create']);
 // Route::post('logged', [loginController::class, 'store'])->name('logged');

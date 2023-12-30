@@ -13,30 +13,9 @@
 
 <body>
     @include('includes.postNav')
-    <!-- Start Navbar -->
-    <!-- <nav id='menu'>
-        <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
-        <ul>
-            <li><a href=''>Home</a></li>
-            <li><a class='dropdown-arrow' href=''>Posts</a>
-                <ul class='sub-menus'>
-                    <li><a href=''>Posts List</a></li>
-                    <li><a href=''>Add Car</a></li>
-                </ul>
-            </li>
-            <li><a class='dropdown-arrow' href='testimonials.php'>Users</a>
-                <ul class='sub-menus'>
-                    <li><a href=''>Users List</a></li>
-                </ul>
-            </li>
-            <li><a href='#'>Contact Us</a></li>
-        </ul>
-    </nav> -->
-    <!-- End Navbar -->
-
     <div class="container">
 
-        <form method="post" action="{{route('update',$post->id)}}" class="m-auto" style="max-width:600px" enctype="multipart/form-data">
+        <form method="post" action="{{route('updatePost',$post->id)}}" class="m-auto" style="max-width:600px" enctype="multipart/form-data">
             @csrf
             @method('put')
             <h3 class="my-4">Update Post</h3>
