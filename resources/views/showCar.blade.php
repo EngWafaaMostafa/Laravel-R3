@@ -13,10 +13,12 @@
 
 <body>
     @include('includes.nav')
-    <h1>title :{{$car->title}}</h1>
-    <h1>description :{{$car->description}}</h1>
+    <h1>Title :{{$car->title}}</h1>
+    <h1>Description :{{$car->description}}</h1>
+    <h1>Category ID:{{$car->category_id}}</h1>
+    <h1>Category Name:{{$car->category->cat_name}}</h1>
     <br>
-    <h1>image :{{$car->image}}</h1>
+    <h1>Image :{{$car->image}}</h1>
     <img src="{{asset('/assets/images/'.$car->image)}}" alt="" style="width:200px;">
     <h1>{{$car->published ?"Published":"Not Published"}}</h1>
     <h1>created_at :{{$car->created_at}}</h1>

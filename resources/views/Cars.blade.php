@@ -20,7 +20,9 @@
                 <tr>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>image</th>
+                    <th>Image</th>
+                    <th>Category ID</th>
+                    <th>Category name</th>
                     <th>Published</th>
                     <th>Edit Car</th>
                     <th>Show Car</th>
@@ -33,6 +35,8 @@
                     <td>{{$car->title}}</td>
                     <td>{{$car->description}}</td>
                     <td>{{$car->image}} <br><img src="{{asset('/assets/images/'.$car->image)}}" alt="" style="width:200px;"></td>
+                    <td>{{$car->category_id}}</td>
+                    <td>{{$car->category->cat_name}}</td>
 
                     <td>{{$car->published ?'Yes':'No'}}</td>
                     <td><a href="UpdateCar/{{$car->id}}">Update</a></td>

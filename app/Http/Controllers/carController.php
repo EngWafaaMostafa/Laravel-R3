@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Models\Category;
 use App\Traits\Common;
 
 class carController extends Controller
@@ -24,7 +25,9 @@ class carController extends Controller
      */
     public function create()
     {
-        return view('AddCar');
+        $categories = Category::get();
+
+        return view('AddCar', compact('categories'));
     }
 
     /**
@@ -43,6 +46,7 @@ class carController extends Controller
             'title' => 'required|string|max:50',
             'description' => 'required|string|max:50',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required',
         ], $message);
 
 
@@ -85,8 +89,9 @@ class carController extends Controller
      */
     public function edit(string $id)
     {
+        $categories = Category::get();
         $car = Car::findOrFail($id);
-        return view('UpdateCar', compact('car'));
+        return view('UpdateCar', compact('car', 'categories'));
     }
 
     /**
@@ -94,11 +99,13 @@ class carController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //$categories = Category::get();
         $messages = $this->messages();
         $data = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string',
             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required',
         ], $messages);
 
         if ($request->hasFile('image')) {
@@ -179,6 +186,7 @@ class carController extends Controller
             'image.required' => 'Please be sure to select an image',
             'image.mimes' => 'Incorrect image type',
             'image.max' => 'Max file size exceeded',
+            'category_id' => 'please insert category',
         ];
     }
     public function upload(Request $request)
